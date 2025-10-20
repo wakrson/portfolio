@@ -1,103 +1,100 @@
-import Image from "next/image";
-
-export default function Home() {
+export default function Portfolio() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen bg-neutral-100 text-neutral-900 font-sans">
+      {/* Navbar */}
+      <header className="flex justify-between items-center px-10 py-4 border-b border-neutral-200">
+        <h1 className="text-2xl font-semibold">Mark Robinson</h1>
+        <div className="flex gap-6 items-center text-sm">
+          <a href="https://www.linkedin.com/in/mialbro/" className="hover:text-indigo-600">LinkedIn</a>
+          <a href="https://www.github.com/wakrson/" className="hover:text-indigo-600">GitHub</a>
+          <a href="mailto:wakrson@gmail.com" className="hover:text-indigo-600">Contact</a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </header>
+
+      {/* Hero Section */}
+      <section className="grid md:grid-cols-2 gap-6 items-center px-10 py-10">
+        <div className="flex flex-col gap-3">
+          <h2 className="text-3xl font-bold leading-snug">
+            AI Research Scientist @ <span className="text-indigo-600">Northeastern University</span>
+          </h2>
+          <p className="text-neutral-600 text-sm">
+            MSc Robotics Engineering · Worcester Polytechnic Institute (2021) <br />
+            BSc Computer Engineering · The University of Alabama (2020)
+          </p>
+          <p className="mt-2 text-neutral-700 text-sm max-w-lg">
+            As a researcher at Northeastern University, I focus on advancing autonomous perception and intelligent systems. With a strong foundation in robotics engineering and computer vision, my work integrates multi-sensor data and real-time inference to improve how machines perceive and interact with complex environments.
+          </p>
+        </div>
+
+        <div className="relative">
+          <img
+            src="/unrep.png"
+            alt="Mark working on laptop in UAS lab"
+            className="rounded-xl shadow-lg object-cover object-bottom w-full h-[320px]"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-xl" />
+          <div className="absolute bottom-3 left-3 text-white text-xs bg-black/50 px-2 py-1 rounded-md">
+            Field Testing - Naval Research Site
+          </div>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section className="px-10 py-10 bg-white border-t border-neutral-200">
+        <h3 className="text-xl font-semibold mb-4">Technical Skills</h3>
+        <div className="grid md:grid-cols-3 gap-4 text-sm">
+          <div>
+            <h4 className="font-medium text-neutral-700 mb-1">Programming</h4>
+            <p>C++, Python, CUDA</p>
+          </div>
+          <div>
+            <h4 className="font-medium text-neutral-700 mb-1">Frameworks</h4>
+            <p>PyTorch, TensorRT, ROS 2, OpenCV, PCL, CGAL, GTSAM</p>
+          </div>
+          <div>
+            <h4 className="font-medium text-neutral-700 mb-1">Domains</h4>
+            <p>Computer Vision, Perception, Sensor Fusion, SLAM, Embedded AI, Machine Learning</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section className="px-10 py-12 bg-neutral-50">
+        <h3 className="text-xl font-semibold mb-6">Projects</h3>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              title: "PointFusionV2",
+              desc: "Multi-modal 3D object detection pipeline using RGB + LiDAR fusion.",
+              link: "https://github.com/wakrson/pointfusion",
+            },
+            {
+              title: "taey",
+              desc: "C++/ROS2-based RGB-D SLAM system with real-time visualization.",
+              link: "https://github.com/wakrson/taey",
+            },
+            {
+              title: "U-Net",
+              desc: "Semantic segmentation model trained on Cityscapes and deployed with TensorRT.",
+              link: "https://github.com/wakrson/unet",
+            },
+          ].map((p) => (
+            <div
+              key={p.title}
+              className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-neutral-200 text-sm"
+            >
+              <h4 className="text-lg font-semibold mb-1">{p.title}</h4>
+              <p className="text-neutral-700 mb-3 leading-snug">{p.desc}</p>
+              <a
+                href={p.link}
+                className="text-indigo-600 hover:text-indigo-800 font-medium"
+              >
+                View Project →
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
   );
 }
