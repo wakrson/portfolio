@@ -81,7 +81,7 @@ export default function Portfolio() {
         {[
           {
             title: "taey",
-            desc: "Developed a real-time RGB-D SLAM pipeline integrating TensorRT-accelerated ViT-32 embeddings for keyframe feature extraction, FAISS-based visual similarity search, and GTSAM iSAM2 for incremental pose graph optimization",
+            desc: "Real-time RGB-D SLAM pipeline integrating TensorRT-accelerated ViT-32 embeddings for keyframe feature extraction, FAISS-based visual similarity search, and GTSAM iSAM2 for incremental pose graph optimization",
             link: "https://github.com/wakrson/taey",
           },
           {
