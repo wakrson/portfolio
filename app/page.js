@@ -62,7 +62,7 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-3 gap-4 text-sm">
           <div>
             <h4 className="font-medium text-neutral-700 mb-1">Programming</h4>
-            <p>C++, Python, Java</p>
+            <p>C++, Python</p>
           </div>
           <div>
             <h4 className="font-medium text-neutral-700 mb-1">Frameworks</h4>
@@ -79,6 +79,11 @@ export default function Portfolio() {
       <h3 className="text-xl font-semibold mb-6">Research Projects</h3>
       <div className="grid md:grid-cols-2 gap-6">
         {[
+          {
+            title: "wiys?",
+            desc: "Google Cloud hosted perception ML platform. Utilizing WebRTC for browser-to-server communications, FastAPI for web architecture, and TensorRT compiled visual models for real-time performance. Containerized backend with dependencies and deploment recipes",
+            link: "https://wiyscv.com",
+          },
           {
             title: "taey",
             desc: "Real-time RGB-D SLAM pipeline integrating TensorRT-accelerated ViT-32 embeddings for keyframe feature extraction, FAISS-based visual similarity search, and GTSAM iSAM2 for incremental pose graph optimization",
