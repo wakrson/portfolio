@@ -138,7 +138,7 @@ export default function Portfolio() {
   <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
     <div>
       <h3 className="text-xl font-semibold">
-        Model Zoo <span className="text-indigo-600">Weights & Specs</span>
+        Model Zoo <span className="text-indigo-600">Exported Model Weights</span>
       </h3>
       <p className="text-sm text-neutral-700 mt-1">
         Downloadable model artifacts
