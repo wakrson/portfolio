@@ -1,4 +1,79 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+
 export default function Portfolio() {
+  const MODEL_ZOO = [
+    {
+      name: "Depth Anyting V2",
+      task: "Monocular Depth Estimation",
+      framework: "Pytorch",
+      format: "ONNX",
+      precision: "FP32",
+      sizeMB: 1300,
+      input: "1x3x518x518",
+      dataset: "",
+      metric: "",
+      link: "https://drive.google.com/uc?export=download&id=18_1GkpPiGazCnWNrBSJvqCE71Uf5LnL1",
+    },
+    {
+      name: "DINOv3 Convnext Base pretrain lvd1689m",
+      task: "Image Embedding",
+      framework: "Pytorch",
+      format: "ONNX",
+      precision: "FP32",
+      sizeMB: 350.4,
+      input: "1x3x224x224",
+      dataset: "",
+      metric: "",
+      link: "https://drive.google.com/uc?export=download&id=1vWMIh4WkS0tQijyTeLY74OHH3lbClE1i",
+    },
+    {
+      name: "RTDETRv2 r18vd_120e coco rerun48",
+      task: "Object Detection",
+      framework: "Pytorch",
+      format: "ONNX",
+      precision: "FP32",
+      sizeMB: 80.4,
+      input: "1x3x640x640",
+      dataset: "",
+      metric: "",
+      link: "https://drive.google.com/uc?export=download&id=1P9w_KbZfhm7Rv0nKTNnFn4vwG7i4j1Fp",
+    },
+
+  ];
+
+  const [q, setQ] = useState("");
+  const [taskFilter, setTaskFilter] = useState("All");
+  const [fwFilter, setFwFilter] = useState("All");
+
+  const tasks = useMemo(
+    () => ["All", ...Array.from(new Set(MODEL_ZOO.map((m) => m.task)))],
+    []
+  );
+  const frameworks = useMemo(
+    () => ["All", ...Array.from(new Set(MODEL_ZOO.map((m) => m.framework)))],
+    []
+  );
+
+  const filteredModels = useMemo(() => {
+    const query = q.trim().toLowerCase();
+    return MODEL_ZOO.filter((m) => {
+      const matchesQuery =
+        !query ||
+        `${m.name} ${m.task} ${m.framework} ${m.format} ${m.precision} ${m.dataset || ""} ${m.metric || ""}`
+          .toLowerCase()
+          .includes(query);
+
+      const matchesTask = taskFilter === "All" || m.task === taskFilter;
+      const matchesFw = fwFilter === "All" || m.framework === fwFilter;
+
+      return matchesQuery && matchesTask && matchesFw;
+    });
+  }, [q, taskFilter, fwFilter]);
+
+
   return (
 <main className="min-h-screen bg-neutral-100 text-neutral-900 font-sans">
   {/* Navbar */}
@@ -19,7 +94,6 @@ export default function Portfolio() {
       </a>
     </div>
   </header>
-
 
   {/* Hero Section */}
   <section className="grid md:grid-cols-2 gap-6 items-center px-10 py-4">
@@ -56,29 +130,107 @@ export default function Portfolio() {
 
       </section>
 
-      {/* Skills */}
-      <section className="px-10 py-4 bg-white border-t border-neutral-200">
-        <h3 className="text-xl font-semibold ">Technical Skills</h3>
-        <div className="grid md:grid-cols-3 gap-4 text-sm">
-          <div>
-            <h4 className="font-medium text-neutral-700 mb-1">Programming</h4>
-            <p>C++, Python</p>
-          </div>
-          <div>
-            <h4 className="font-medium text-neutral-700 mb-1">Frameworks</h4>
-            <p>PyTorch, TensorRT, ROS 2, OpenCV, PCL, CGAL, GTSAM</p>
-          </div>
-          <div>
-            <h4 className="font-medium text-neutral-700 mb-1">Domains</h4>
-            <p>Computer Vision / Perception, Camera Calibration, Sensor Fusion, SLAM, Embedded AI, Machine Learning, Robotics</p>
-          </div>
-        </div>
-      </section>
+{/* Model Zoo */}
+<section
+  id="model-zoo"
+  className="px-10 py-8 bg-indigo-50/40 border-t border-neutral-200"
+>
+  <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+    <div>
+      <h3 className="text-xl font-semibold">
+        Model Zoo <span className="text-indigo-600">Weights & Specs</span>
+      </h3>
+      <p className="text-sm text-neutral-700 mt-1">
+        Downloadable model artifacts
+      </p>
+    </div>
+
+    <div className="flex flex-col gap-2 md:flex-row md:items-center">
+      <input
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder="Search…"
+        className="w-full md:w-[320px] rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+
+    </div>
+  </div>
+
+  <div className="mt-6 overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm">
+    <div className="overflow-x-auto">
+      <table className="min-w-full text-left text-sm">
+        <thead className="bg-neutral-50 text-neutral-700">
+          <tr>
+            <th className="px-4 py-3 font-semibold">Model Name</th>
+            <th className="px-4 py-3 font-semibold">Task</th>
+            <th className="px-4 py-3 font-semibold">Framework</th>
+            <th className="px-4 py-3 font-semibold">Format</th>
+            <th className="px-4 py-3 font-semibold">Input</th>
+            <th className="px-4 py-3 font-semibold">Prec</th>
+            <th className="px-4 py-3 font-semibold">Size</th>
+            <th className="px-4 py-3 font-semibold">Metric</th>
+            <th className="px-4 py-3 font-semibold">Link</th>
+          </tr>
+        </thead>
+
+        <tbody className="divide-y divide-neutral-200">
+          {filteredModels.map((m) => (
+            <tr key={m.name} className="hover:bg-neutral-50">
+              <td className="px-4 py-3">
+                <div className="font-semibold text-neutral-900">{m.name}</div>
+                {(m.dataset || "") && (
+                  <div className="text-xs text-neutral-600 mt-1">{m.dataset}</div>
+                )}
+              </td>
+              <td className="px-4 py-3 text-neutral-700">{m.task}</td>
+              <td className="px-4 py-3 text-neutral-700">{m.framework}</td>
+              <td className="px-4 py-3 text-neutral-700">{m.format}</td>
+              <td className="px-4 py-3 font-mono text-xs text-neutral-700">
+                {m.input}
+              </td>
+              <td className="px-4 py-3 text-neutral-700">{m.precision}</td>
+              <td className="px-4 py-3 text-neutral-700">{m.sizeMB} MB</td>
+              <td className="px-4 py-3 text-neutral-700">{m.metric || "-"}</td>
+              <td className="px-4 py-3">
+                <a
+                  href={m.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-indigo-600 hover:text-indigo-700"
+                >
+                  Download →
+                </a>
+              </td>
+            </tr>
+          ))}
+
+          {filteredModels.length === 0 && (
+            <tr>
+              <td className="px-4 py-6 text-neutral-600" colSpan={9}>
+                No models match your search.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+
+    <div className="flex items-center justify-between border-t border-neutral-200 bg-neutral-50 px-4 py-3 text-xs text-neutral-600">
+      <span>{filteredModels.length} model(s)</span>
+    </div>
+  </div>
+</section>
+
     {/* Projects */}
     <section className="px-10 py-4 bg-neutral-50">
       <h3 className="text-xl font-semibold mb-6">Research Projects</h3>
       <div className="grid md:grid-cols-2 gap-6">
         {[
+          {
+            title: "mss",
+            desc: "Monocular Semantic SLAM pipeline utilizing TensorRT-accelerated Depth Anything v2, RTDETRv2, and DINOv3 models for depth estimation, object detection, and scene recognition/object tracking",
+            link: "https://github.com/wakrson/mss",
+          },
           {
             title: "wiys?",
             desc: "Google Cloud hosted perception ML platform. Utilizing WebRTC for browser-to-server communications, FastAPI for web architecture, and TensorRT compiled visual models for real-time performance. Containerized backend with dependencies and deploment recipes",
@@ -115,6 +267,26 @@ export default function Portfolio() {
         ))}
       </div>
     </section>
+
+  {/* Skills */}
+  <section className="px-10 py-4 bg-white border-t border-neutral-200">
+    <h3 className="text-xl font-semibold ">Technical Skills</h3>
+    <div className="grid md:grid-cols-3 gap-4 text-sm">
+      <div>
+        <h4 className="font-medium text-neutral-700 mb-1">Programming</h4>
+        <p>C++, Python</p>
+      </div>
+      <div>
+        <h4 className="font-medium text-neutral-700 mb-1">Frameworks</h4>
+        <p>PyTorch, TensorRT, ROS 2, OpenCV, PCL, CGAL, GTSAM</p>
+      </div>
+      <div>
+        <h4 className="font-medium text-neutral-700 mb-1">Domains</h4>
+        <p>Computer Vision / Perception, Camera Calibration, Sensor Fusion, SLAM, Embedded AI, Machine Learning, Robotics</p>
+      </div>
+    </div>
+  </section>
+
 {/* Articles & Media */}
 <section className="px-10 py-8 bg-white border-t border-neutral-200">
   <h3 className="text-xl font-semibold mb-6">Articles & Media</h3>
