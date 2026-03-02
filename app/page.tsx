@@ -99,7 +99,7 @@ export default function Portfolio() {
     const query = q.trim().toLowerCase();
     if (!query) return folders;
     return folders.filter((f) => {
-      const meta = MODEL_META[f.name] || {};
+      const meta: Partial<ModelMeta> = MODEL_META[f.name] || {};
       return `${f.name} ${meta.task || ""} ${meta.framework || ""} ${meta.format || ""} ${meta.precision || ""}`
         .toLowerCase()
         .includes(query);
