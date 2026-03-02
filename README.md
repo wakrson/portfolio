@@ -1,4 +1,4 @@
-# wakrson.com
+# Portfolio
 
 Personal portfolio and project showcase for **Mark Robinson** — AI Research Scientist at Kostas Research Institute (KRI).
 
