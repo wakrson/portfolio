@@ -256,7 +256,7 @@ export default function Portfolio() {
             {
               title: "wiys?",
               desc: "Google Cloud hosted perception ML platform. Utilizing WebRTC for browser-to-server communications, FastAPI for web architecture, and TensorRT compiled visual models for real-time performance. Containerized backend with dependencies and deployment recipes",
-              link: "https://wiyscv.com",
+              link: "https://github.com/wakrson/wiys",
             },
             {
               title: "taey",
